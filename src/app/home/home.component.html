@@ -1,0 +1,15 @@
+<ActionBar>
+    <Label text="Home"></Label>
+</ActionBar>
+
+<GridLayout rows="*, auto">
+    <ListView row="0" [items]="items">
+        <ng-template let-item="item">
+            <GridLayout columns="1*, 3*">
+                <Label col="0" [nsRouterLink]="['../item', item.id]" [text]="item.name"></Label>
+                <Label col="1" [nsRouterLink]="['../item', item.id]" [text]="item.description"></Label>
+            </GridLayout>
+        </ng-template>
+    </ListView>
+    <Button row="1" text="Click me!" [nsRouterLink]="['../add-item']"></Button>
+</GridLayout>
