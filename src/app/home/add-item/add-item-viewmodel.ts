@@ -2,6 +2,8 @@ export class AddItemViewmodel {
     name: string;
 
     image?: string;
+
+    quantity?: number; // [g]
     calories?: number; // [kcal/100g]
     carbohydrates?: number; // [g/100g]
     sugar?: number; // [g/100g]

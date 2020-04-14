@@ -4,6 +4,9 @@ import { HttpClient } from "@angular/common/http";
 export interface FoodNutrition {
     name: string;
 
+    image?: string; // Image as binary
+
+    quantity?: number; // [g]
     calories?: number; // [kcal/100g]
     carbohydrates?: number; // [g/100g]
     sugar?: number; // [g/100g]
@@ -31,6 +34,9 @@ export class NutritionRepositoryService {
 
                 return {
                     name: result["product"]["product_name"],
+                    quantity: result["product"]["product_quantity"],
+
+                    image: result["product"]["selected_images"]["front"]["thumb"]["de"],
 
                     // We can only get the data in kJ, but would like to have kcal
                     calories: NutritionRepositoryService.joulesToCalories(
