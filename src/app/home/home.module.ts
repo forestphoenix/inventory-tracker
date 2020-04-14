@@ -1,6 +1,7 @@
 import { NgModule, NO_ERRORS_SCHEMA } from "@angular/core";
 import { NativeScriptCommonModule } from "nativescript-angular/common";
 import { NativeScriptFormsModule } from "nativescript-angular";
+import { BarcodeScanner } from "nativescript-barcodescanner";
 
 import { HomeRoutingModule } from "./home-routing.module";
 import { HomeComponent } from "./home.component";
@@ -15,5 +16,6 @@ import { AddItemComponent } from "./add-item/add-item.component";
     ],
     declarations: [HomeComponent, ItemDetailComponent, AddItemComponent],
     schemas: [NO_ERRORS_SCHEMA],
+    providers: [BarcodeScanner],
 })
 export class HomeModule {}

@@ -1,9 +1,11 @@
 export class AddItemViewmodel {
-    name: string = "antimatter potato";
+    name: string;
 
-    amount: number = -12; // [g]
-    calories: number = -42; // [kcal/100g]
-    carbohydrates: number; // [g/100g]
-    protein: number; // [g/100g]
-    fat: number; // [g/100g]
+    image?: string;
+    calories?: number; // [kcal/100g]
+    carbohydrates?: number; // [g/100g]
+    sugar?: number; // [g/100g]
+    fat?: number; // [g/100g]
+    saturatedFat?: number; // [g/100g]
+    protein?: number; // [g/100g]
 }

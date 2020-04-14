@@ -3,30 +3,40 @@
     <Label text="Add"></Label>
 </ActionBar>
 
-<GridLayout rows=", auto, auto, auto, auto, auto, auto, auto, auto", columns="*, *, auto">
+<GridLayout rows="*, auto, auto, auto, auto, auto, auto, auto, auto, auto", columns="*, *, auto">
 
-    <TextField [text]="data.name" row="1" col="0" colspan="3"></TextField>
+    <Image row="0" col="0" colspan="3" src="{{ data.image }}" width="100" height="100" stretch="aspectFill"></Image>
 
-    <Label class="edit_label"       row="2" col="0" text="Amount: "></Label>
-    <TextField [text]="data.amount" row="2" col="1" ></TextField>
-    <Label class="edit_label"       row="2" col="3" text="g"></Label>
+    <TextField [(ngModel)]="data.name" row="1" col="0" colspan="3"></TextField>
 
-    <Label class="edit_label"         row="3" col="0" text="Energy: "></Label>
+    <Label class="edit_label"            row="2" col="0" text="Amount: "></Label>
+    <TextField [(ngModel)]="data.amount" row="2" col="1" ></TextField>
+    <Label class="edit_label"            row="2" col="3" text="g"></Label>
+
+    <Label class="edit_label"              row="3" col="0" text="Energy: "></Label>
     <TextField [(ngModel)]="data.calories" row="3" col="1" ></TextField>
-    <Label class="edit_label"         row="3" col="3" text="kcal"></Label>
+    <Label class="edit_label"              row="3" col="3" text="kcal"></Label>
 
-    <Label class="edit_label"              row="4" col="0" text="Carbohydrates: "></Label>
-    <TextField [text]="data.calories" row="4" col="1" ></TextField>
-    <Label class="edit_label"              row="4" col="3" text="g"></Label>
+    <Label class="edit_label"         row="4" col="0" text="Fat: "></Label>
+    <TextField [(ngModel)]="data.fat" row="4" col="1" ></TextField>
+    <Label class="edit_label"         row="4" col="3" text="g"></Label>
 
-    <Label class="edit_label"        row="5" col="0" text="Protein: "></Label>
-    <TextField [(ngModel)]="data.protein" row="5" col="1" ></TextField>
-    <Label class="edit_label"        row="5" col="3" text="g"></Label>
+    <Label class="edit_label"                  row="5" col="0" text="Thereof saturated: "></Label>
+    <TextField [(ngModel)]="data.saturatedFat" row="5" col="1" ></TextField>
+    <Label class="edit_label"                  row="5" col="3" text="g"></Label>
 
-    <Label class="edit_label"    row="6" col="0" text="Fat: "></Label>
-    <TextField [(ngModel)]="data.fat" row="6" col="1" ></TextField>
-    <Label class="edit_label"    row="6" col="3" text="g"></Label>
+    <Label class="edit_label"                   row="6" col="0" text="Carbohydrates: "></Label>
+    <TextField [(ngModel)]="data.carbohydrates" row="6" col="1" ></TextField>
+    <Label class="edit_label"                   row="6" col="3" text="g"></Label>
 
-    <Button text="Scan" row="7" col="0" colspan="3" (tap)="onScanTap()"></Button>
+    <Label class="edit_label"                   row="7" col="0" text="Thereof sugar: "></Label>
+    <TextField [(ngModel)]="data.carbohydrates" row="7" col="1" ></TextField>
+    <Label class="edit_label"                   row="7" col="3" text="g"></Label>
+
+    <Label class="edit_label"             row="8" col="0" text="Protein: "></Label>
+    <TextField [(ngModel)]="data.protein" row="8" col="1" ></TextField>
+    <Label class="edit_label"             row="8" col="3" text="g"></Label>
+
+    <Button text="Scan" row="9" col="0" colspan="3" (tap)="onScanTap()"></Button>
 
 </GridLayout>
