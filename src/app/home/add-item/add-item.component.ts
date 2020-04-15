@@ -20,42 +20,29 @@ export class AddItemComponent implements OnInit {
 
     ngOnInit(): void {}
 
-    onScanTap(): void {
-        this.barcodeScanner
-            .scan({
-                formats: "EAN_13",
-                showFlipCameraButton: true,
-                preferFrontCamera: false,
-                showTorchButton: true,
-                beepOnScan: true,
-                torchOn: false,
-                resultDisplayDuration: 500,
-                // orientation: orientation,
-                openSettingsIfPermissionWasPreviouslyDenied: true, // ios only
-            })
-            .then((result) => {
-                alert({
-                    title: "You Scanned ",
-                    message:
-                        "Format: " +
-                        result.format +
-                        ",\nContent: " +
-                        result.text,
-                    okButtonText: "OK",
-                });
+    async onScanTap(): Promise<void> {
 
-                this.data.name = result.text;
+        const result = await this.barcodeScanner.scan({
+            formats: "EAN_13",
+            showFlipCameraButton: true,
+            preferFrontCamera: false,
+            showTorchButton: true,
+            beepOnScan: true,
+            torchOn: false,
+            resultDisplayDuration: 500,
+            orientation: "portrait",
+            openSettingsIfPermissionWasPreviouslyDenied: true, // ios only
+        });
 
-                return this.nutritionRepository.findByEAN(result.text);
-            })
-            .then(
-                (result) => {
-                    copyInto(this.data, result);
-                },
-                (errorMessage) => {
-                    console.log("Error when scanning " + errorMessage);
-                }
-            );
+        this.data.name = result.text;
+
+        this.data.uiEnabled = false;
+        const lookup = await this.nutritionRepository.findByEAN(result.text);
+
+        await delay(1000);
+
+        Object.assign(this.data, lookup);
+        this.data.uiEnabled = true;
     }
 
     onBackTap(): void {
@@ -63,10 +50,6 @@ export class AddItemComponent implements OnInit {
     }
 }
 
-function copyInto<Target>(target: Target, ...sources: Array<object>) {
-    return sources.forEach((current) => {
-        Object.keys(current).forEach((key) => {
-            target[key] = current[key];
-        });
-    });
+function delay(ms: number) {
+    return new Promise((resolve) => setTimeout(resolve, ms));
 }

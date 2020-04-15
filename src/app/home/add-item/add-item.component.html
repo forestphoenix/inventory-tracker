@@ -3,39 +3,40 @@
     <Label text="Add"></Label>
 </ActionBar>
 
-<GridLayout rows="*, auto, auto, auto, auto, auto, auto, auto, auto, auto", columns="*, *, auto">
+<GridLayout rows="*, auto, auto, auto, auto, auto, auto, auto, auto, auto", columns="*, *, auto" class="add-item">
 
-    <Image row="0" col="0" colspan="3" src="{{ data.image }}" width="100" height="100" stretch="aspectFill"></Image>
+    <Image  *ngIf="data.uiEnabled" row="0" col="0" colspan="3" src="{{ data.image }}" stretch="aspectFit"></Image>
+    <ActivityIndicator *ngIf="!data.uiEnabled" row="0" col="0" colspan="3" horizontalAlignment="center" busy="true"></ActivityIndicator>
 
     <TextField [(ngModel)]="data.name" row="1" col="0" colspan="3"></TextField>
 
-    <Label class="edit_label"            row="2" col="0" text="Quantity: "></Label>
-    <TextField [(ngModel)]="data.quantity" row="2" col="1" ></TextField>
-    <Label class="edit_label"            row="2" col="3" text="g"></Label>
+    <Label     row="2" col="0" text="Quantity:" class="nutriment-label"></Label>
+    <TextField row="2" col="1" [(ngModel)]="data.quantity" class="nutriment-edit" keyboardType="number" [isEnabled]="data.uiEnabled"></TextField>
+    <Label     row="2" col="2" text="g" class="nutriment-label"></Label>
 
-    <Label class="edit_label"              row="3" col="0" text="Energy: "></Label>
-    <TextField [(ngModel)]="data.calories" row="3" col="1" ></TextField>
-    <Label class="edit_label"              row="3" col="3" text="kcal"></Label>
+    <Label     row="3" col="0" text="Energy:" class="nutriment-label"></Label>
+    <TextField row="3" col="1" [(ngModel)]="data.calories" class="nutriment-edit" keyboardType="number" [isEnabled]="data.uiEnabled"></TextField>
+    <Label     row="3" col="2" text="kcal/100g" class="nutriment-label"></Label>
 
-    <Label class="edit_label"         row="4" col="0" text="Fat: "></Label>
-    <TextField [(ngModel)]="data.fat" row="4" col="1" ></TextField>
-    <Label class="edit_label"         row="4" col="3" text="g"></Label>
+    <Label     row="4" col="0" text="Fat: " class="nutriment-label"></Label>
+    <TextField row="4" col="1" [(ngModel)]="data.fat" class="nutriment-edit" keyboardType="number" [isEnabled]="data.uiEnabled"></TextField>
+    <Label     row="4" col="2" text="g/100g" class="nutriment-label"></Label>
 
-    <Label class="edit_label"                  row="5" col="0" text="Thereof saturated: "></Label>
-    <TextField [(ngModel)]="data.saturatedFat" row="5" col="1" ></TextField>
-    <Label class="edit_label"                  row="5" col="3" text="g"></Label>
+    <Label     row="5" col="0" text="Thereof saturated:" class="nutriment-label"></Label>
+    <TextField row="5" col="1" [(ngModel)]="data.saturatedFat" class="nutriment-edit" keyboardType="number" [isEnabled]="data.uiEnabled"></TextField>
+    <Label     row="5" col="2" text="g/100g" class="nutriment-label"></Label>
 
-    <Label class="edit_label"                   row="6" col="0" text="Carbohydrates: "></Label>
-    <TextField [(ngModel)]="data.carbohydrates" row="6" col="1" ></TextField>
-    <Label class="edit_label"                   row="6" col="3" text="g"></Label>
+    <Label     row="6" col="0" text="Carbohydrates:" class="nutriment-label"></Label>
+    <TextField row="6" col="1" [(ngModel)]="data.carbohydrates" class="nutriment-edit" keyboardType="number" [isEnabled]="data.uiEnabled"></TextField>
+    <Label     row="6" col="2" text="g/100g" class="nutriment-label"></Label>
 
-    <Label class="edit_label"                   row="7" col="0" text="Thereof sugar: "></Label>
-    <TextField [(ngModel)]="data.sugar" row="7" col="1" ></TextField>
-    <Label class="edit_label"                   row="7" col="3" text="g"></Label>
+    <Label     row="7" col="0" text="Thereof sugar:" class="nutriment-label"></Label>
+    <TextField row="7" col="1" [(ngModel)]="data.sugar" class="nutriment-edit" keyboardType="number" [isEnabled]="data.uiEnabled"></TextField>
+    <Label     row="7" col="2" text="g/100g" class="nutriment-label"></Label>
 
-    <Label class="edit_label"             row="8" col="0" text="Protein: "></Label>
-    <TextField [(ngModel)]="data.protein" row="8" col="1" ></TextField>
-    <Label class="edit_label"             row="8" col="3" text="g"></Label>
+    <Label     row="8" col="0" text="Protein: " class="nutriment-label"></Label>
+    <TextField row="8" col="1" [(ngModel)]="data.protein" class="nutriment-edit" keyboardType="number" [isEnabled]="data.uiEnabled"></TextField>
+    <Label     row="8" col="2" text="g/100g" class="nutriment-label"></Label>
 
     <Button text="Scan" row="9" col="0" colspan="3" (tap)="onScanTap()"></Button>
 

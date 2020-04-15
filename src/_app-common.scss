@@ -45,7 +45,16 @@
     }
 }
 
-.edit_label {
-    vertical-align: center;
-    text-align: center;
+.add-item Image {
+    align-content: center;
+
+    padding: 5;
+}
+
+.add-item .nutriment-label {
+    padding: 0, 5;
+}
+
+.add-item .nutriment-edit {
+    margin: -20, 5;
 }

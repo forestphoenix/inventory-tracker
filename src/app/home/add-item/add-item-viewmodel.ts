@@ -3,6 +3,8 @@ export class AddItemViewmodel {
 
     image?: string;
 
+    uiEnabled: boolean = true;
+
     quantity?: number; // [g]
     calories?: number; // [kcal/100g]
     carbohydrates?: number; // [g/100g]

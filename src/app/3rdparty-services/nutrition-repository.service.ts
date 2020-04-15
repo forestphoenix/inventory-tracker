@@ -36,7 +36,10 @@ export class NutritionRepositoryService {
                     name: result["product"]["product_name"],
                     quantity: result["product"]["product_quantity"],
 
-                    image: result["product"]["selected_images"]["front"]["thumb"]["de"],
+                    image:
+                        result["product"]["selected_images"]["front"][
+                            "display"
+                        ]["de"],
 
                     // We can only get the data in kJ, but would like to have kcal
                     calories: NutritionRepositoryService.joulesToCalories(
