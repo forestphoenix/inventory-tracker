@@ -1,10 +1,6 @@
 {
   "main": "main.js",
   "android": {
-    "v8Flags": "--expose_gc",
-    "markingMode": "none"
-  },
-  "dependencies": {
-    "tslint": "^6.1.1"
+    "v8Flags": "--expose_gc"
   }
 }
