@@ -4,10 +4,6 @@ import { RouterExtensions } from "nativescript-angular/router";
 import { BarcodeScanner } from "nativescript-barcodescanner";
 import { NutritionRepositoryService } from "~/app/3rdparty-services/nutrition-repository.service";
 
-import { FileEventStore } from "ts-eventsourcing/EventStore/FileEventStore";
-import { TransitJSSerializer } from "ts-eventsourcing/Serializer/transit-js/TransitJSSerializer";
-import { FoodAdded, FoodConsumed, FoodFinished, FoodInfo } from '../../model/inventory';
-
 @Component({
     moduleId: module.id,
     selector: "add-item",
@@ -20,47 +16,36 @@ export class AddItemComponent implements OnInit {
         private _routerExtensions: RouterExtensions,
         private barcodeScanner: BarcodeScanner,
         private nutritionRepository: NutritionRepositoryService
-    ) {
-        const added = new FoodAdded({info: new FoodInfo()});
-    }
+    ) {}
 
     ngOnInit(): void {}
 
     async onScanTap(): Promise<void> {
-        try {
-            const result = await this.barcodeScanner.scan({
-                formats: "EAN_13 EAN_8",
-                showFlipCameraButton: true,
-                preferFrontCamera: false,
-                showTorchButton: true,
-                beepOnScan: true,
-                torchOn: false,
-                resultDisplayDuration: 500,
-                orientation: "portrait",
-                openSettingsIfPermissionWasPreviouslyDenied: true, // ios only
-            });
 
-            this.data.name = result.text;
+        const result = await this.barcodeScanner.scan({
+            formats: "EAN_13",
+            showFlipCameraButton: true,
+            preferFrontCamera: false,
+            showTorchButton: true,
+            beepOnScan: true,
+            torchOn: false,
+            resultDisplayDuration: 500,
+            orientation: "portrait",
+            openSettingsIfPermissionWasPreviouslyDenied: true, // ios only
+        });
 
-            this.data.uiEnabled = false;
-            const lookup = await this.nutritionRepository.findByEAN(
-                result.text
-            );
+        this.data.name = result.text;
 
-            await delay(1000);
+        this.data.uiEnabled = false;
+        const lookup = await this.nutritionRepository.findByEAN(result.text);
 
-            Object.assign(this.data, lookup);
-        } finally {
-            this.data.uiEnabled = true;
-        }
+        await delay(1000);
+
+        Object.assign(this.data, lookup);
+        this.data.uiEnabled = true;
     }
 
     onBackTap(): void {
-        let fs = FileEventStore.fromFile(
-            "inventory-tracker-items.esl",
-            new TransitJSSerializer([FoodAdded, FoodConsumed])
-        );
-
         this._routerExtensions.back();
     }
 }
