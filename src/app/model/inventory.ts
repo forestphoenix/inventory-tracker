@@ -1,15 +1,13 @@
-import { UuidIdentity } from "ts-eventsourcing/ValueObject/UuidIdentity";
-import { DomainEvent } from "ts-eventsourcing/Domain/DomainEvent";
-import { ReadModel } from "ts-eventsourcing/ReadModel/ReadModel";
-import { Projector } from "ts-eventsourcing/ReadModel/Projector";
-import { Repository } from "ts-eventsourcing/ReadModel/Repository";
-import { HandleDomainEvent } from "ts-eventsourcing/EventHandling/HandleDomainEvent";
-import { DomainMessage } from "ts-eventsourcing/Domain/DomainMessage";
-import { Record } from "immutable";
-
 // tslint:disable: max-classes-per-file
 
-export class FoodId extends UuidIdentity {}
+type FoodEventTag = "FoodAdded" | "FoodConsumed"
+
+interface FoodEvent {
+    readonly tag: FoodEventTag;
+}
+
+/*
+export class FoodId extends UuidIdentity implements Event {}
 
 export class FoodInfo extends Record({
     name: "undefined",
@@ -84,3 +82,4 @@ export class StoredFoodProjector implements Projector {
         await this.repository.remove(message.aggregateId);
     }
 }
+*/
