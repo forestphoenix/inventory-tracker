@@ -5,9 +5,10 @@
 <GridLayout rows="*, auto">
     <ListView row="0" [items]="items">
         <ng-template let-item="item">
-            <GridLayout columns="1*, 3*">
+            <GridLayout columns="*, *, *">
                 <Label col="0" [nsRouterLink]="['../item', item.id]" [text]="item.name"></Label>
-                <Label col="1" [nsRouterLink]="['../item', item.id]" [text]="item.description"></Label>
+                <Label col="1" [nsRouterLink]="['../item', item.id]" [text]="item.quantity"></Label>
+                <Label col="2" [nsRouterLink]="['../item', item.id]" [text]="item.calories"></Label>
             </GridLayout>
         </ng-template>
     </ListView>

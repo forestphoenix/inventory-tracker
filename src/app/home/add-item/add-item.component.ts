@@ -4,6 +4,7 @@ import { RouterExtensions } from "nativescript-angular/router";
 import { BarcodeScanner } from "nativescript-barcodescanner";
 import { NutritionRepositoryService } from "~/app/3rdparty-services/nutrition-repository.service";
 import { InventoryService } from "../../model/inventory.service";
+import { addFood } from "../../model/inventory-commands";
 
 @Component({
     moduleId: module.id,
@@ -44,6 +45,12 @@ export class AddItemComponent implements OnInit {
 
         Object.assign(this.data, lookup);
         this.data.uiEnabled = true;
+    }
+
+    onAddTap(): void {
+        this.inventory.runCommand(addFood(this.data));
+
+        this._routerExtensions.back();
     }
 
     onBackTap(): void {

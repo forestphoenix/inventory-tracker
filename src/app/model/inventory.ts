@@ -11,16 +11,19 @@ export class FoodId {
 }
 
 export class FoodInfo {
-    name = "undefined";
-    image = null as null | string; // Image as binary
+    name: string;
 
-    quantity = null as null | number; // [g]
-    calories = null as null | number; // [kcal/100g]
-    carbohydrates = null as null | number; // [g/100g]
-    sugar = null as null | number; // [g/100g]
-    fat = null as null | number; // [g/100g]
-    saturatedFat = null as null | number; // [g/100g]
-    protein = null as null | number; // [g/100g]) {
+    image?: string;
+
+    uiEnabled: boolean = true;
+
+    quantity?: number; // [g]
+    calories?: number; // [kcal/100g]
+    carbohydrates?: number; // [g/100g]
+    sugar?: number; // [g/100g]
+    fat?: number; // [g/100g]
+    saturatedFat?: number; // [g/100g]
+    protein?: number; // [g/100g]
 }
 
 export class FoodAdded {
@@ -62,11 +65,11 @@ export type DomainEvent =
     | FoodDisposed;
 
 export class StoredFoods {
-    stored: Map<FoodId, FoodInfo>;
+    stored = new Map<FoodId, FoodInfo>();
 }
 
 export class DomainModel {
-    storedFoods: StoredFoods;
+    storedFoods = new StoredFoods();
 
     project(event: DomainEvent): void {
         switch (event.tag) {
