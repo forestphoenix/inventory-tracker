@@ -1,7 +1,7 @@
 // tslint:disable-next-line: variable-name
 const Sqlite = require("nativescript-sqlite");
 
-export class EventStoreService<TEvent, TProjection> {
+export class EventStore<TEvent, TProjection> {
     private db: any;
     private projectionVersion = 0;
 

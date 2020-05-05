@@ -3,6 +3,7 @@ import { AddItemViewmodel } from "./add-item-viewmodel";
 import { RouterExtensions } from "nativescript-angular/router";
 import { BarcodeScanner } from "nativescript-barcodescanner";
 import { NutritionRepositoryService } from "~/app/3rdparty-services/nutrition-repository.service";
+import { InventoryService } from "../../model/inventory.service";
 
 @Component({
     moduleId: module.id,
@@ -15,13 +16,13 @@ export class AddItemComponent implements OnInit {
     constructor(
         private _routerExtensions: RouterExtensions,
         private barcodeScanner: BarcodeScanner,
-        private nutritionRepository: NutritionRepositoryService
+        private nutritionRepository: NutritionRepositoryService,
+        private inventory: InventoryService
     ) {}
 
     ngOnInit(): void {}
 
     async onScanTap(): Promise<void> {
-
         const result = await this.barcodeScanner.scan({
             formats: "EAN_13",
             showFlipCameraButton: true,

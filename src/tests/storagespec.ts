@@ -1,6 +1,6 @@
 // tslint:disable: max-classes-per-file
 
-import { EventStoreService } from "~/app/storage/event-store.service";
+import { EventStore } from "~/app/storage/event-store";
 
 // tslint:disable-next-line: variable-name
 const Sqlite = require("nativescript-sqlite");
@@ -14,10 +14,10 @@ class Projection {
 }
 
 describe("EventStoreService", () => {
-    let service: EventStoreService<Event, Projection>;
+    let service: EventStore<Event, Projection>;
 
     beforeEach(() => {
-        service = new EventStoreService<Event, Projection>(
+        service = new EventStore<Event, Projection>(
             { total: 0 },
             (ev, proj) => {
                 proj.total += ev.increment;
@@ -66,7 +66,7 @@ describe("EventStoreService", () => {
         });
 
         let callsToProjectOnReopen = 0;
-        const reopenedService = new EventStoreService<Event, Projection>(
+        const reopenedService = new EventStore<Event, Projection>(
             { total: 0 },
             (ev, proj) => {
                 proj.total += ev.increment;
