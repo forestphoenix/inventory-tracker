@@ -15,8 +15,8 @@ export class InventoryService {
         );
     }
 
-    async init() {
-        this.eventStore.initDb("invetory-tracker.events.db3");
+    async init(dbName: string) {
+        this.eventStore.initDb(dbName);
     }
 
     getStoredFoods(): StoredFoods {

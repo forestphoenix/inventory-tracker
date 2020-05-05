@@ -1,10 +1,10 @@
 // tslint:disable: max-classes-per-file
 
-import { v4 as uuid } from "uuid";
+import { NSCrypto } from "nativescript-crypto";
 
 export class FoodId {
     constructor() {
-        this.id = uuid();
+        this.id = new NSCrypto().randomUUID();
     }
 
     id: string;
@@ -66,8 +66,6 @@ export class StoredFoods {
 }
 
 export class DomainModel {
-    constructor(private id = FoodId) {}
-
     storedFoods: StoredFoods;
 
     project(event: DomainEvent): void {

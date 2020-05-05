@@ -2,7 +2,7 @@ import { DomainModel, DomainEvent, FoodInfo, FoodAdded, FoodId } from './invento
 
 export type InventoryCommand = (model: DomainModel) => [DomainEvent];
 
-export function addFood(info: FoodInfo)
+export function addFood(info: FoodInfo, id = new FoodId()): InventoryCommand
 {
-    return [{tag: "FoodAdded", info, id: new FoodId()}];
+    return _ => [{tag: "FoodAdded", info, id}];
 }

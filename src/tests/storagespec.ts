@@ -46,24 +46,7 @@ describe("EventStoreService", () => {
         });
     });
 
-    describe("an initialized database", () => {
-        beforeEach(async () => {
-            await service.initDb(":memory:");
-        });
-
-        it("can record an event", async () => {
-            await service.recordEvent({ increment: 3 });
-
-            expect(service.getProjection().total).toBe(3);
-        });
-    });
-
     describe("reading from the database", () => {
-        beforeEach(async () => {
-            if (await Sqlite.exists("testdb.db3")) {
-                await Sqlite.deleteDatabase("testdb.db3");
-            }
-        });
 
         let callsToProjectOnReopen = 0;
         const reopenedService = new EventStore<Event, Projection>(
@@ -75,6 +58,10 @@ describe("EventStoreService", () => {
         );
 
         it("will use the projector with few events", async () => {
+            if (await Sqlite.exists("testdb.db3")) {
+                await Sqlite.deleteDatabase("testdb.db3");
+            }
+
             await service.initDb("testdb.db3");
 
             await service.recordEvent({ increment: 1 });
@@ -92,6 +79,10 @@ describe("EventStoreService", () => {
         });
 
         it("will use the projector and the cache with many events", async () => {
+            if (await Sqlite.exists("testdb.db3")) {
+                await Sqlite.deleteDatabase("testdb.db3");
+            }
+            
             await service.initDb("testdb.db3");
 
             for (let i = 1; i < 100; i++) {
@@ -107,6 +98,10 @@ describe("EventStoreService", () => {
             expect(callsToProjectOnReopen).toBeGreaterThan(0); // We want at least one project to be executed to test that scenario
 
             await reopenedService.close();
+
+            if (await Sqlite.exists("testdb.db3")) {
+                await Sqlite.deleteDatabase("testdb.db3");
+            }
         });
     });
 });

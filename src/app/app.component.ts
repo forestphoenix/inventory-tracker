@@ -11,6 +11,6 @@ export class AppComponent implements OnInit {
     }
 
     async ngOnInit(): Promise<void> {
-        await this.inventory.init();
+        await this.inventory.init("inventory.events.db3");
     }
 }
